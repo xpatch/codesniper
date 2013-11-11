@@ -1,0 +1,28 @@
+{
+  "name": "code_sniper",
+  "version": "0.0.0",
+  "description": "Testing collab",
+  "main": "index.js",
+  "readmeFilename": "README.md",
+  "readme": "Code Sniper",
+  "scripts": {
+    "start": "node index.js",
+    "test": "./node_modules/mocha/bin/mocha  -R spec -u bdd $(find tests -name 'test_*.js')"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:xpatch/codesniper.git"
+  },
+  "author": "Code Sniper",
+  "license": "",
+  "dependencies": {
+    "restify": "~2.6.0",
+    "async": "~0.2.9",
+    "express": "~3.4.4"
+  },
+  "devDependencies": {
+    "mocha": "~1.13.0",
+    "chai": "~1.8.1"
+  }
+
+}
