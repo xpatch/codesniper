@@ -4,6 +4,10 @@ var request = require('request');
 var inspect = require('util').inspect;
 var async = require('async');
 
+var couchdb = { ip: '172.17.0.3', port: '5984', url: 'http://172.17.0.3:5984' };
+
+
+
 /*
 request('http://127.0.0.1:5984', function( err, res, body ) {
 	var data = JSON.parse( res.body );
@@ -17,7 +21,7 @@ function setup( cb ) {
 
 	async.series([
 		function (cb) { 	
-			request('http://127.0.0.1:5984', function( err, res, body ) {
+			request(couchdb.url, function( err, res, body ) {
 
 				var data = JSON.parse( res.body );
 				clog( data );
@@ -27,7 +31,7 @@ function setup( cb ) {
 		},
 		function (cb) {
 
-			request('http://127.0.0.1:5984/accounts', function( err, res, body ) {
+			request(couchdb.url+'/accounts', function( err, res, body ) {
 				
 				var data = JSON.parse( res.body );
 				clog( data );
@@ -38,7 +42,7 @@ function setup( cb ) {
 
 		},
 		function (cb) {
-			request.put('http://127.0.0.1:5984/accounts', function( err, res, body ) {
+			request.put(couchdb.url+'/accounts', function( err, res, body ) {
 				
 				var data = JSON.parse( res.body );
 				clog( data );
