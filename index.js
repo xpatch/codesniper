@@ -2,45 +2,36 @@
 
 
 var express = require('express');
-var couchdb = require('couchdb-api');
 var request = require('request');
+var engines = require('consolidate');
+
+
 
 
 var app = express();
 
+app.locals = {
+    
+    title: '&copy;0d3 5n1p3&reg;',
+    engine: 'sniper'
+    
+};
 
-var dbc = couchdb.srv('http://172.17.0.10:5984');
 
 
 
+app.get( '/', function(req,res,next){
 
 
+    res.send('Alo?');
 
-/*
-app.use(function(req,res,next) {
-    console.log('%s %s', req.method, req.url);
-    next();
-});
-
-app.get('/',function(req,res){
-   
-   res.send('testingz');
+    
+    
     
 });
 
-app.listen(process.env.PORT);
-*/
 
 
 
-
-
-//app.listen(process.env.PORT,'0.0.0.0');
-//app.listen('2323','172.17.0.3');
-
-
-
-
-
-
+app.listen(3000);
 
