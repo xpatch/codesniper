@@ -34,6 +34,7 @@ function clog( data ) { console.log( inspect( data, { colors: true, depth: null,
 var app = express();
 
 
+/*
 app.set('views', __dirname + '/views');
 var ECT = require('ect');
 var ectRenderer = ECT({ 
@@ -46,11 +47,14 @@ var ectRenderer = ECT({
 
 app.engine('ect', ectRenderer.render);
 app.set('view engine', 'ect');
-
-/*
-app.engine('ect', cons.ect);
-app.set('view engine', 'ect');
 */
+
+app.engine('html', cons.ect);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+
+//app.engine('ect', cons.ect);
+//app.set('view engine', 'ect');
 /*
 app.locals = {
     title: '&copy;0d3 5n1p3&reg;'
@@ -60,7 +64,7 @@ app.locals = {
 
 
 app.get('/', function (req,res) {
-    res.render('index', {title:'test title'});
+    res.render('index', {tinkle:'test title'});
 //    res.render('index.ect',{title:'punk monkeyness'});
     //res.locals({title: 'test title'});
     //res.render('index',{title: 'test'});
