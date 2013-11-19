@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>{{title}} <%- @tinkle %></title>
+<style type="text/css">
+
+@font-face {
+  font-family: Acid;
+  src: url(pc.ttf);
+}
+
+
+body {font-family:pc,monospace;font-size: 9pt;color:#FFFFFF; background: #000000 url(codesniper.gif) no-repeat }
+textarea { color: black; background-color: transparent; }
+
+
+input { color: white; background-color: black; border: 1px dashed white;font-family:monospace;font-size: 9pt; }
+select { color: white; background-color: black; border: 1px dashed white;font-family:monospace;font-size: 9pt; }
+option { color: white; background-color: black; border: 1px dashed white;font-family:monospace;font-size: 9pt; }
+.codesniper a { text-decoration: none; }
+.codesniper a:link { color: white; }
+.codesniper a:visited { color: white; }
+.codesniper a:hover { color: blue; }
+.codesniper a:active { color: red;  }
+
+#src { width: 800px; height: 535px; color: white; background-color: transparent; border: 1px dashed white; font-size: 9pt; } 
+
+</style>
+
+</head>
+<body>
+
+<div  style="margin: 165px 8px 0px 176px; float: left;width:800px; ">
+    <br />
+    Filename: <input type="text" name="filename" /> Search: <input type="text" name="search" />    
+    <form method="POST">
+    <textarea name="src" id="src"></textarea>
+    <input type="submit" name="submit" value="GO" />
+    </form>
+</div>
+    
+    
+</body>
+</html>

@@ -49,6 +49,7 @@ app.engine('ect', ectRenderer.render);
 app.set('view engine', 'ect');
 */
 
+
 app.engine('html', cons.ect);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
@@ -64,7 +65,9 @@ app.locals = {
 
 
 app.get('/', function (req,res) {
-    res.render('index', {tinkle:'test title'});
+    res.render('add',{tinkle:'test title'});
+    //res.render('index',{tinkle:'test title'});
+    
 //    res.render('index.ect',{title:'punk monkeyness'});
     //res.locals({title: 'test title'});
     //res.render('index',{title: 'test'});
