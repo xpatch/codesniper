@@ -27,6 +27,11 @@ http://stackoverflow.com/questions/12209607/using-layout-view-in-express-with-co
 var express = require('express');
 var cons = require('consolidate');
 var inspect = require('util').inspect;
+var request = require('request');
+
+
+var couchdb = { ip: '172.17.0.3', port: '5984', url: 'http://172.17.0.3:5984' };
+
 
 function clog( data ) { console.log( inspect( data, { colors: true, depth: null, showHidden: true }) ); }
 
@@ -66,12 +71,18 @@ app.locals = {
 
 app.get('/', function (req,res) {
     res.render('add',{tinkle:'test title'});
-    //res.render('index',{tinkle:'test title'});
-    
-//    res.render('index.ect',{title:'punk monkeyness'});
-    //res.locals({title: 'test title'});
-    //res.render('index',{title: 'test'});
 });
+
+app.post('/add', function (req,res) {
+  
+  clog(req.params);
+  //request.post(couchdb.url+'/codesniper', function (err,res,body) {  
+  //});
+  
+  res.send(201); 
+  
+});
+
 
 
 /*
