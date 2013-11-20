@@ -75,12 +75,14 @@ app.get('/', function (req,res) {
 
 app.post('/add', function (req,res) {
   
-  console.log("OMFG");
   clog(req.body.src);
   //clog(req.params);
   //clog(req.query);
-  //request.post(couchdb.url+'/codesniper', function (err,res,body) {  
-  //});
+  request.post(couchdb.url+'/codesniper', function (err,res,body) {  
+    clog(err);
+    clog(body);
+      
+  });
   
   res.send(201); 
   
@@ -94,5 +96,11 @@ app.get( '/', function(req,res,next){ res.send('Alo?'); });
 
 
 
+if( process.env.PORT ) { 
+  console.log("Listening on "+process.env.PORT);
+  app.listen(process.env.PORT);
+} else {
+  console.log("Listening on 8900");
+  app.listen(8900);
+}
 
-app.listen(process.env.PORT);
