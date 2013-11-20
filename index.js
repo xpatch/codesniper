@@ -59,12 +59,12 @@ app.engine('html', cons.ect);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
+app.use(express.bodyParser());
+
 //app.engine('ect', cons.ect);
 //app.set('view engine', 'ect');
 /*
-app.locals = {
-    title: '&copy;0d3 5n1p3&reg;'
-};
+app.locals = { title: '&copy;0d3 5n1p3&reg;' };
 */
 
 
@@ -75,7 +75,10 @@ app.get('/', function (req,res) {
 
 app.post('/add', function (req,res) {
   
-  clog(req.params);
+  console.log("OMFG");
+  clog(req.body.src);
+  //clog(req.params);
+  //clog(req.query);
   //request.post(couchdb.url+'/codesniper', function (err,res,body) {  
   //});
   
@@ -86,9 +89,7 @@ app.post('/add', function (req,res) {
 
 
 /*
-app.get( '/', function(req,res,next){
-    res.send('Alo?');
-});
+app.get( '/', function(req,res,next){ res.send('Alo?'); });
 */
 
 
