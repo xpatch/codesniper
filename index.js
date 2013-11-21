@@ -78,7 +78,8 @@ app.post('/add', function (req,res) {
   clog(req.body.src);
   //clog(req.params);
   //clog(req.query);
-  request.post(couchdb.url+'/codesniper', function (err,res,body) {  
+  var json_data = { src: req.body.src };
+  request.post({ uri: couchdb.url+'/codesniper', json: json_data }, function (err,res,body) {  
     clog(err);
     clog(body);
       
