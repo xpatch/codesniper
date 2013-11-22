@@ -58,8 +58,8 @@ app.set('view engine', 'ect');
 app.engine('html', cons.ect);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
-
 app.use(express.bodyParser());
+app.use(express.static('static'));
 
 //app.engine('ect', cons.ect);
 //app.set('view engine', 'ect');
@@ -70,15 +70,19 @@ app.locals = { title: '&copy;0d3 5n1p3&reg;' };
 
 
 app.get('/', function (req,res) {
-    res.render('add',{tinkle:'test title'});
+    res.render('add', {title:'Teh Title'} );
 });
+
+
+
+
 
 app.post('/add', function (req,res) {
   
   clog(req.body.src);
   //clog(req.params);
   //clog(req.query);
-  var json_data = { src: req.body.src };
+  var json_data = { src: req.body.src, filename: req.body.filename };
   request.post({ uri: couchdb.url+'/codesniper', json: json_data }, function (err,res,body) {  
     clog(err);
     clog(body);

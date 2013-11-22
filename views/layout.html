@@ -1,15 +1,44 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-      <title>test </title>
-      <style type="text/css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title><% @title %></title>
+      
+      <style type="text/css" media="screen">
+      body {
+        overflow: hidden;
+      }
     
+      #editor { 
+          font-size: 11pt;
+          width: 70%;
+          height: 480px;
+          margin: 0;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+      }
+
+      body {font-family:pc,monospace;font-size: 9pt;color:#FFFFFF; background: #000000 url(images/codesniper.gif) no-repeat }
+
+      .content { padding: 165px 0px 0px 190px }
+
+      input.codesniper { color: white; background-color: black; border: 1px dashed white;font-family:monospace;font-size: 9pt; }
+      .codesniper a { text-decoration: none; }
+      .codesniper a:link { color: white; }
+      .codesniper a:visited { color: white; }
+      .codesniper a:hover { color: blue; }
+      .codesniper a:active { color: red;  }
+      
+        /*
         @font-face {
           font-family: Acid;
           src: url(pc.ttf);
         }
         
         
-        body {font-family:pc,monospace;font-size: 9pt;color:#FFFFFF; background: #000000 url(codesniper.gif) no-repeat }
         textarea { color: black; background-color: transparent; }
         
         
@@ -23,11 +52,15 @@
         .codesniper a:active { color: red;  }
         
         #src { width: 800px; height: 535px; color: white; background-color: transparent; border: 1px dashed white; font-size: 9pt; } 
+        */
 
       </style>
-
+      <script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
+      
     </head>
     <body>
+        <div class="content">
         <% content %>
+        </div>
     </body>
 </html>
