@@ -1,0 +1,28 @@
+<% extend 'layout.ect' %>
+<div>
+
+<form method="POST" action="/search">
+search: <input class="codesniper" type="text" name="search" /><br />
+</form>
+
+<form method="POST" action="/add">
+  filename: <input class="codesniper" type="text" name="filename" /><br />
+  <pre id="editor">
+  function clog( data ) { console.log( inspect( data, { colors: true, depth: null, showHidden: true }) ); }
+  </pre>  
+  <script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/clouds_midnight");
+    editor.getSession().setMode("ace/mode/javascript");
+    editor.setKeyboardHandler("ace/keyboard/vim");
+    //editor.keyBinding.setKeyboardHandler(ace.require("ace/keyboard/vim").handler);
+    //editor.keyBinding.setKeyboardHandler("ace/keyboard/vim");
+    //ace.require("ace/keyboard/vim").handler
+    editor.setShowPrintMargin(false);
+  </script>
+
+  <input class="codesniper" type="submit" name="submit" value="GO" />
+</form>
+
+
+</div>

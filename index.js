@@ -38,50 +38,27 @@ function clog( data ) { console.log( inspect( data, { colors: true, depth: null,
 
 var app = express();
 
-
-/*
-app.set('views', __dirname + '/views');
-var ECT = require('ect');
-var ectRenderer = ECT({ 
-  watch: true, 
-  cache:false,
-  root: __dirname + '/views',
-  //open: '{{',
-  //close: '}}'
-});
-
-app.engine('ect', ectRenderer.render);
-app.set('view engine', 'ect');
-*/
-
-
 app.engine('html', cons.ect);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 app.use(express.bodyParser());
 app.use(express.static('static'));
 
-//app.engine('ect', cons.ect);
-//app.set('view engine', 'ect');
-/*
-app.locals = { title: '&copy;0d3 5n1p3&reg;' };
-*/
-
-
 
 app.get('/', function (req,res) {
     res.render('add', {title:'Teh Title'} );
 });
 
-
+/*
+app.get('/', function (req,res) {
+    res.render('add', {title:'Teh Title'} );
+});
+*/
 
 
 
 app.post('/add', function (req,res) {
   
-  clog(req.body.src);
-  //clog(req.params);
-  //clog(req.query);
   var json_data = { src: req.body.src, filename: req.body.filename };
   request.post({ uri: couchdb.url+'/codesniper', json: json_data }, function (err,res,body) {  
     clog(err);
@@ -92,12 +69,6 @@ app.post('/add', function (req,res) {
   res.send(201); 
   
 });
-
-
-
-/*
-app.get( '/', function(req,res,next){ res.send('Alo?'); });
-*/
 
 
 
