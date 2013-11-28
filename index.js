@@ -30,10 +30,10 @@ var inspect = require('util').inspect;
 var request = require('request');
 
 
-var couchdb = { ip: '172.17.0.3', port: '5984', url: 'http://172.17.0.3:5984' };
+var couchdb = { ip: '10.0.1.16', port: '5984', url: 'http://10.0.1.16:5984' };
 
 
-function clog( data ) { console.log( inspect( data, { colors: true, depth: null, showHidden: true }) ); }
+function clog( data ) { console.log( require('util').inspect( data, { colors: true, depth: null, showHidden: true }) ); }
 
 
 var app = express();
@@ -55,7 +55,21 @@ app.get('/', function (req,res) {
 });
 */
 
+app.post('/search/:query', function (req,res) {
+  
+  request.post(
+    { 
+      uri: couchdb.url+'/codesniper?include_docs=true', 
+      json: {} 
+    }, 
+    function (post_err,post_res,post_body) {
+      console.log(post_body);
+      res.send(200); 
+    }
+  );
 
+  
+});
 
 app.post('/add', function (req,res) {
   

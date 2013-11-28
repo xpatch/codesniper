@@ -1,0 +1,14 @@
+
+
+{
+  "_id": "_design/generic",
+  "language": "javascript",
+  "views": {
+    "keyword_scan": {
+      "map": "function(doc) { emit(doc._id,doc); }"
+    }
+  }
+
+}
+
+

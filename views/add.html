@@ -1,28 +1,45 @@
 <% extend 'layout.html' %>
 <div>
+search: <input class="codesniper" type="text" id="search" /><input class="codesniper" type="button" name="submit" value="Search" onclick="search();" />
+<br />
 
-<form method="POST" action="/search">
-search: <input class="codesniper" type="text" name="search" /><br />
-</form>
-
-<form method="POST" action="/add">
-  filename: <input class="codesniper" type="text" name="filename" /><br />
+  filename: <input class="codesniper" type="text" id="filename" /><br />
   <pre id="editor">
   function clog( data ) { console.log( inspect( data, { colors: true, depth: null, showHidden: true }) ); }
   </pre>  
-  <script>
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/clouds_midnight");
-    editor.getSession().setMode("ace/mode/javascript");
-    editor.setKeyboardHandler("ace/keyboard/vim");
-    //editor.keyBinding.setKeyboardHandler(ace.require("ace/keyboard/vim").handler);
-    //editor.keyBinding.setKeyboardHandler("ace/keyboard/vim");
-    //ace.require("ace/keyboard/vim").handler
-    editor.setShowPrintMargin(false);
-  </script>
 
-  <input class="codesniper" type="submit" name="submit" value="GO" />
-</form>
+  <input class="codesniper" type="button" name="submit" value="GO" onclick="submit_code();" />
+<script>
+  var editor = ace.edit("editor");
+  editor.setTheme("ace/theme/clouds_midnight");
+  editor.getSession().setMode("ace/mode/javascript");
+  editor.setKeyboardHandler("ace/keyboard/vim");
+  editor.setShowPrintMargin(false);
 
+  function submit_code() {
+
+    var filename = $('#filename').val();
+    $.post("/add",{ "src": editor.getValue(), "filename": filename }, function () { 
+      $('<div />').html('Success').dialog({ title: 'Created '+filename });
+    });
+
+  }
+
+
+  function search() {
+    var search_term = $('#search').val();
+    
+    $.post("/search/"+search_term, function () {
+      $('<div />').html('Success').dialog({ title: 'Searching for '+search_term });
+    });
+
+  }
+
+
+
+</script>
+
+
+ 
 
 </div>
