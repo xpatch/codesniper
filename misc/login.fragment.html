@@ -1,0 +1,146 @@
+	<script type="text/javascript">
+
+	Ext.Loader.setConfig({enabled:true});
+
+	Ext.require([
+	    'Ext.window.Window',
+	    'Ext.util.Cookies',
+	    'Ext.form.*',
+	    'Ext.JSON.*'
+	]);
+
+	Ext.onReady(function(){
+
+
+
+		/****************************************************
+		*
+		* BUG UNTIL 4.0.7 
+		* http://www.sencha.com/forum/showthread.php?136576-4.0.2-formBind-no-longer-functions/page2
+		*
+		****************************************************/
+		Ext.override(Ext.form.Basic, {
+		 getBoundItems: function() {
+		  var boundItems = this._boundItems;
+		  if (!boundItems || boundItems.getCount() == 0) {
+		   boundItems = this._boundItems = Ext.create('Ext.util.MixedCollection');
+		   boundItems.addAll(this.owner.query('[formBind]'));
+		  }
+		  return boundItems;
+		 },
+		 initialize: function(){
+		  this.callOverridden();
+		  this.owner.on('beforerender', this.checkValidity, this);
+		 }
+		});  
+
+
+		var submitConfig = {
+			method: 'POST',
+			waitTitle:'Connecting',
+			waitMsg: 'Authorizing...',
+
+			success:function(){ 
+				var redirect = 'main.php'; 
+				window.location = redirect;
+			},
+			failure:function(form, action){ 
+				if(action.failureType == 'server'){ 
+					obj = Ext.JSON.decode(action.response.responseText); 
+
+					if( obj.reason != null ) {
+						Ext.Msg.alert('Login Failed!', obj.reason); 
+					}
+
+				} else { 
+					Ext.Msg.alert('Warning!', 'Authentication server is unreachable : ' + action.response.responseText); 
+				} 
+				form.getForm().reset(); 
+			} 
+		};
+
+
+
+
+		var win;
+		var loginform;
+
+		if( !win ) {
+
+
+			loginform = Ext.create('Ext.form.Panel', {
+				bodyPadding: 5,
+				labelWidth:75,
+                                frame: false,
+                                defaultType: 'textfield',
+                                url:'login.php', 
+				timeout: 5,
+				items: [{
+					fieldLabel: 'Username',
+					name: 'username',
+					id: 'username',
+					value: Ext.util.Cookies.get("USERNAME"),
+					allowBlank: false
+				},{
+					fieldLabel: 'Password',
+					name: 'pword',
+					id: 'pword',
+					inputType: 'password',
+					minLength: 4,
+					maxLength: 16,
+					minLengthText: 'Passwords must be at least 4 characters long.',
+					validateOnBlur: true,
+					allowBlank: false,
+					enableKeyEvents: true,
+					listeners: {
+						keypress: function(field, e){
+							if (e.getKey() == e.ENTER) {
+								var form = this.up('form').getForm();	
+								if( form.isValid() ) {						
+									form.submit(submitConfig); 
+								}
+							}
+						}
+					}
+
+				}],
+
+				buttons: [{
+
+					text:'Login',
+					formBind: true, 
+					disabled: true,
+					handler: function() {
+						var form = this.up('form').getForm();	
+						if( form.isValid() ) {						
+							form.submit(submitConfig); 
+						}
+
+
+					}
+				}]
+
+
+			});
+
+			
+			win = Ext.create('Ext.window.Window', {
+				title: 'Login',
+				layout: 'fit',
+				width: 320,
+				height: 130,
+				closeable: false,
+				closeAction: Ext.emptyFn,
+				items: [loginform]
+
+			});
+		}
+
+		win.show();
+	});
+
+
+
+
+	</script>
+

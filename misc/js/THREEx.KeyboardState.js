@@ -56,9 +56,9 @@ THREEx.KeyboardState	= function()
 /**
  * To pause listening of the keyboard events
 */
-
 THREEx.KeyboardState.prototype.pause	= function()
 {
+
 	if( this.running == true ) {
 		// unbind keyEvents
 		document.removeEventListener("keydown", this._onKeyDown, false);
@@ -70,27 +70,9 @@ THREEx.KeyboardState.prototype.pause	= function()
 		document.addEventListener("keyup", this._onKeyUp, false);
 		this.running = true;
 	}
-};
-
-
-
-THREEx.KeyboardState.prototype.resume	= function()
-{
-	document.addEventListener("keydown", this._onKeyDown, false);
-	document.addEventListener("keyup", this._onKeyUp, false);
-	this.running = true;
 
 };
 
-
-THREEx.KeyboardState.prototype.stop	= function()
-{
-	// unbind keyEvents
-	document.removeEventListener("keydown", this._onKeyDown, false);
-	document.removeEventListener("keyup", this._onKeyUp, false);
-	this.keyCodes	= {};
-	this.running = false;
-};
 
 
 
