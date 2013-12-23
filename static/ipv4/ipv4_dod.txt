@@ -1,0 +1,19 @@
+6/8|Army Information Systems Center
+11/8|DoD Intel Information Systems
+21/8|DDN-RVN
+22/8|Defense Information Systems Agency
+25/8|UK Ministry of Defence          
+26/8|Defense Information Systems Agency
+28/8|DSI-North
+29/8|Defense Information Systems Agency
+30/8|Defense Information Systems Agency
+33/8|DLA Systems Automation Center
+47/8|Bell-Northern Research
+48/8|Prudential Securities Inc.
+51/8|UK Government Department for Work and Pensions
+53/8|Cap Debis CCS
+55/8|DoD Network Information Center
+56/8|US Postal Service
+57/8|SITA
+214/8|US-DOD
+215/8|US-DOD

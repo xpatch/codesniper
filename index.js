@@ -91,6 +91,6 @@ if( process.env.PORT ) {
   app.listen(process.env.PORT);
 } else {
   console.log("Listening on 8900");
-  app.listen(8900);
+  app.listen(8900,'0.0.0.0');
 }
 
