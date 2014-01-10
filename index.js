@@ -74,6 +74,9 @@ app.post('/search/:query', function (req,res) {
 app.post('/add', function (req,res) {
   
   var json_data = { src: req.body.src, filename: req.body.filename };
+
+  clog(json_data);
+
   request.post({ uri: couchdb.url+'/codesniper', json: json_data }, function (err,res,body) {  
     clog(err);
     clog(body);
