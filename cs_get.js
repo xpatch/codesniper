@@ -5,6 +5,7 @@ function clog( data ) { console.log( require('util').inspect( data, { colors: tr
 var fs = require('fs');
 var request = require('request');
 var colors = require('colors');
+var config = require('./config');
 
 
 var data = "";
