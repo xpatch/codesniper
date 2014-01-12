@@ -6,7 +6,18 @@
   "views": {
     "keyword_scan": {
       "map": "function(doc) { emit(doc._id,doc); }"
+    },
+    "dir": {
+      "map": "function(doc) { emit(doc.filename,doc); }"
+    },
+    "dirid": {
+      "map": "function(doc) { emit(doc.filename,doc._id); }"
+    },
+    "dirsrc": {
+      "map": "function(doc) { emit(doc.filename,doc.src); }"
     }
+
+
   }
 
 }
