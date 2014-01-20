@@ -21,7 +21,6 @@ request.get({ uri: couchdb.url+'/codesniper/_design/generic/_view/dirid'}, funct
   var docz = JSON.parse(body).rows;
   for( var doc in docz ) {
     console.log(docz[doc]['key']);
-
   }
 
 

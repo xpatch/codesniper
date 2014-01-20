@@ -1,4 +1,4 @@
-
+#!/usr/local/bin/node
 
 
 var request = require('request');

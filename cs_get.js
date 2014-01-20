@@ -20,6 +20,9 @@ var keyword = process.argv[2];
 
 request.get({ uri: couchdb.url+'/codesniper/_all_docs?include_docs=true' }, function (err,res,body) {  
 
+
+  if (err) return(console.log(err));
+
   var body_parse = JSON.parse(body);
   var results = new Object();
 
@@ -33,7 +36,7 @@ request.get({ uri: couchdb.url+'/codesniper/_all_docs?include_docs=true' }, func
 
       if( !results[doc.filename] ) {
         results[doc.filename] = new Object();
-        results[doc.filename]['context'] = new Object();
+        results[doc.filename]['context'] = new Array();
         results[doc.filename]['hits'] = new Object();
         results[doc.filename]['hits']['total'] = 0;
       }
@@ -42,22 +45,25 @@ request.get({ uri: couchdb.url+'/codesniper/_all_docs?include_docs=true' }, func
       //for( var line in lines ) {
 
         if( lines[i].indexOf(keyword) > 0 ) {
-          var adjecent_lines  = [];
+          var adjecent_lines  = new Object();
           var line_index = i;
 
 
-          //results[doc.filename]['hits'].push(lines[i]);
           results[doc.filename]['hits'][i.toString()] = lines[i];
           results[doc.filename]['hits']['total']++;
           
 
           if( (i - adj) > 0 ) line_index -= adj;
 
-          for( var line_x = line_index; line_x < (line_index+4); line_x++ ) {
-            if( lines[line_x] ) results[doc.filename]['context'][line_x.toString()] = lines[line_x];
-            //console.log("Adding: "+lines[line_x]);
+          for( var line_x = line_index; line_x < (i+adj+1); line_x++ ) {
+            if( lines[line_x] ) {
+              adjecent_lines[line_x.toString()] = lines[line_x];
+            } else {
+              adjecent_lines[line_x.toString()] = "";
+            }
           }
 
+          results[doc.filename]['context'].push(adjecent_lines);
 
         }   // if keyword found on line
       }     // loop through lines

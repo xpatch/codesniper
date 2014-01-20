@@ -29,8 +29,12 @@ var cons = require('consolidate');
 var inspect = require('util').inspect;
 var request = require('request');
 
+var CodeSniper =  require('./codesniper');
 
-var couchdb = { ip: '10.0.1.16', port: '5984', url: 'http://10.0.1.16:5984' };
+var config = require('./config');
+var couchdb = config.couchdb;
+
+var sniper = new CodeSniper(config);
 
 
 function clog( data ) { console.log( require('util').inspect( data, { colors: true, depth: null, showHidden: true }) ); }
@@ -49,12 +53,30 @@ app.get('/', function (req,res) {
     res.render('add', {title:'Teh Title'} );
 });
 
-/*
-app.get('/', function (req,res) {
-    res.render('add', {title:'Teh Title'} );
-});
-*/
+app.get('/search', function (req,res) {
 
+
+    sniper.Search(req.query.q, function (err, results) {
+      res.send(results,200);
+    });
+
+});
+
+app.post('/search', function (req,res) {
+
+  clog(req.body);
+  
+
+  res.render('search', {title:'Teh Search'} );
+
+
+});
+
+
+
+
+
+/*
 app.post('/search/:query', function (req,res) {
   
   request.post(
@@ -67,9 +89,8 @@ app.post('/search/:query', function (req,res) {
       res.send(200); 
     }
   );
-
-  
 });
+*/
 
 app.post('/add', function (req,res) {
   
